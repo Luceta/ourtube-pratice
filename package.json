@@ -1,0 +1,27 @@
+{
+  "name": "we-tube",
+  "version": "1.0.0",
+  "description": "Youtube clone with Node JS",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node -- ./bin/www",
+    "dev": "nodemon --exec babel-node ./bin/www"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^6.0.11",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "nodemon": "^2.0.13"
+  }
+}

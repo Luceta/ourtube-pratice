@@ -1,10 +1,12 @@
 import express from "express";
-import { join } from "../controllers/userController";
-import { see } from "../controllers/videoController";
+import { join, login } from "../controllers/userController";
+import { home, search } from "../controllers/videoController";
 
 const rootRouter = express.Router();
 
-rootRouter.get("/", see);
+rootRouter.get("/", home);
 rootRouter.get("/join", join);
+rootRouter.get("/login", login);
+rootRouter.get("/search", search);
 
 export default rootRouter;

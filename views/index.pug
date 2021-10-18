@@ -1,10 +1,13 @@
 extends base.pug
+include mixins/video
 
 block head
   title Watch | Wetube
 
 block content
-  h1 Home
-  input(placeholder="test input")
-  button send
+  each video in videos 
+    +video(video)
+  else 
+    li sorry nothing Found
+  
 

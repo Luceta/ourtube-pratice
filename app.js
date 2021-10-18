@@ -1,12 +1,14 @@
-import createError from "http-errors";
 import express from "express";
+import createError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import rootRouter from "./routes/index";
 import userRouter from "./routes/users";
 import videoRouter from "./routes/video";
+
 import "./db";
+
 const app = express();
 
 app.set("view engine", "pug");

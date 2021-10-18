@@ -1,5 +1,13 @@
 extends base
 
-block content 
-  title #{pageTitle} | WeTube 
+block head
+  title Watch | Wetube
 
+block content
+  div
+    p=video.description
+    small=video.createdAt
+  h1 #{video.views} views
+  a(href=`${video.id}/edit`) Edit Video & arr;
+  br
+  a(href=`${video.id}/delete`) Delete Video &arr;

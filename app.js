@@ -6,6 +6,7 @@ import logger from "morgan";
 import rootRouter from "./routes/index";
 import userRouter from "./routes/users";
 import videoRouter from "./routes/video";
+import "dotenv/config";
 
 import "./db";
 

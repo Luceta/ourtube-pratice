@@ -2,10 +2,13 @@ import express from "express";
 import createError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 import logger from "morgan";
+import mongoStore from "connect-mongo";
 import rootRouter from "./routes/index";
 import userRouter from "./routes/users";
 import videoRouter from "./routes/video";
+import { localsMiddleware } from "./Middleware/localsMiddleware";
 import "dotenv/config";
 
 import "./db";
@@ -20,6 +23,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(
+  session({
+    secret: process.env.SECRET_CODE,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: process.env.EXPIRED_TIME,
+    },
+    store: mongoStore.create({ mongoUrl: process.env.DB_URL }),
+  })
+);
+
+app.use((req, res, next) => {
+  req.sessionStore.all((error, sessions) => {
+    console.log(res.locals);
+    next();
+  });
+});
+
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);

@@ -120,6 +120,10 @@ export const githubCallback = async (req, res) => {
     ).email;
 
     if (!email) {
+      return res.redirect("/login");
+    }
+    let user = await User.findOne({ email });
+    if (!user) {
       const user = await User.create({
         name: userData.name ? userData.name : "Unknown",
         username: userData.login,
@@ -130,15 +134,20 @@ export const githubCallback = async (req, res) => {
       });
     }
     req.session.loggedIn = true;
-    req.session.user = email;
+    req.session.user = user;
     return res.redirect("/");
   } else {
     return res.redirect("/login");
   }
 };
 
-export const edit = (req, res) => res.render("edit");
-export const remove = (req, res) => res.send("Remove User");
+export const getEdit = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
+
+export const postEdit = (req, res) => {
+  return res.render("edit-profile");
+};
 
 export const logout = (req, res) => {
   req.session.destroy();

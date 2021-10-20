@@ -10,7 +10,6 @@ import userRouter from "./routes/users";
 import videoRouter from "./routes/video";
 import { localsMiddleware } from "./Middleware/localsMiddleware";
 import "dotenv/config";
-
 import "./db";
 
 const app = express();
@@ -28,8 +27,9 @@ app.use(
     secret: process.env.SECRET_CODE,
     resave: false,
     saveUninitialized: false,
+
     cookie: {
-      maxAge: process.env.EXPIRED_TIME,
+      maxAge: Number(process.env.EXPIRED_TIME),
     },
     store: mongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
@@ -37,7 +37,6 @@ app.use(
 
 app.use((req, res, next) => {
   req.sessionStore.all((error, sessions) => {
-    console.log(res.locals);
     next();
   });
 });

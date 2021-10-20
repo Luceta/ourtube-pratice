@@ -2,7 +2,6 @@
   "name": "we-tube",
   "version": "1.0.0",
   "description": "Youtube clone with Node JS",
-  "main": "index.js",
   "scripts": {
     "start": "babel-node -- ./bin/www",
     "dev": "nodemon --exec babel-node ./bin/www"
@@ -19,6 +18,7 @@
     "http-errors": "~1.6.3",
     "mongoose": "^6.0.11",
     "morgan": "~1.9.1",
+    "node-fetch": "^2.6.1",
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {

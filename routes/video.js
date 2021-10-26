@@ -7,11 +7,16 @@ import {
   deleteVideo,
   watch,
 } from "../controllers/videoController";
-import { checkAuthUser } from "../Middleware/localsMiddleware";
+import { checkAuthUser, videoUpload } from "../Middleware/localsMiddleware";
 
 const videoRouter = express.Router();
 
-videoRouter.route("/upload").all(checkAuthUser).get(getUpload).post(postUpload);
+videoRouter
+  .route("/upload")
+  .all(checkAuthUser)
+  .get(getUpload)
+  .post(videoUpload.single("video"), postUpload);
+
 videoRouter.all(checkAuthUser).get("/:id([0-9a-f]{24})", watch);
 videoRouter
   .route("/:id([0-9a-f]{24})/edit")

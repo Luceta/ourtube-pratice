@@ -7,12 +7,13 @@ import {
   githubCallback,
   getChangePassword,
   postChangePassword,
+  see,
 } from "../controllers/userController";
 
 import {
   checkAuthUser,
   publicMiddleWare,
-  uploadFileMiddleWare,
+  avatarUpload,
 } from "../Middleware/localsMiddleware";
 
 const userRouter = express.Router();
@@ -22,7 +23,7 @@ userRouter
   .route("/edit")
   .all(checkAuthUser)
   .get(getEdit)
-  .post(uploadFileMiddleWare.single("avatar"), postEdit);
+  .post(avatarUpload.single("avatar"), postEdit);
 userRouter.get("/github/start", publicMiddleWare, githubAuth);
 userRouter.get("/github/callback", publicMiddleWare, githubCallback);
 userRouter
@@ -31,4 +32,5 @@ userRouter
   .get(getChangePassword)
   .post(postChangePassword);
 
+userRouter.get("/:id", see);
 export default userRouter;
